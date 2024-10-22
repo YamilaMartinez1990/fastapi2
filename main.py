@@ -39,3 +39,11 @@ def actualizar_blog(blogs_id: int,blogs:Blog):
             blog_db[index] = blogs
             return blogs
     raise HTTPexeption(status_code=404, detail="Blog no encontrada")
+#Eliminar Blog
+@app.delete("/blogs/{blogs_id}",response_model =Blog)
+def eliminar_blog(blogs_id: int):
+    for index, blogs in enumerate(blog_db):
+        if blogs.id == blogs_id:
+            del blog_db[index] 
+            return {"detail":"Mensaje eliminado"}
+    raise HTTPexeption(status_code=404, detail="Blog no encontrado")
