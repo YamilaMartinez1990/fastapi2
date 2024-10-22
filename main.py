@@ -20,3 +20,10 @@ def crear_blog(blogs:Blog):
     blogs.id = len(blog_db) +1
     blog_db.append(blogs)
     return blogs
+#Ver Blog por id
+@app.get("/blogs{blogs_id}",response_model =Blog)
+def obtener_blogs(blogs_id:int):
+    for blogs in blog_db:
+        if blogs.id == blogs_id:
+            return blogs
+        raise HTTPexeption(status_code=404, detail="Blog no encontrado")
