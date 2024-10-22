@@ -27,3 +27,7 @@ def obtener_blogs(blogs_id:int):
         if blogs.id == blogs_id:
             return blogs
         raise HTTPexeption(status_code=404, detail="Blog no encontrado")
+    #Listar mensajes asi nos trae todo
+@app.get("/blogs/",response_model =list[Blog])
+def listar_blog():
+    return blog_db
