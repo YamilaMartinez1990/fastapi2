@@ -31,3 +31,11 @@ def obtener_blogs(blogs_id:int):
 @app.get("/blogs/",response_model =list[Blog])
 def listar_blog():
     return blog_db
+#Actualizar Blog
+@app.put("/blogs/{blogs_id}",response_model =Blog)
+def actualizar_blog(blogs_id: int,blogs:Blog):
+    for index, blogs in enumerate(blog_db):
+        if blogs.id == blogs_id:
+            blog_db[index] = blogs
+            return blogs
+    raise HTTPexeption(status_code=404, detail="Blog no encontrada")
